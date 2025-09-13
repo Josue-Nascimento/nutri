@@ -129,7 +129,7 @@ function App() {
         <>
           <section>
             <div className="container mx-auto px-4 text-center">
-              <div className="mb-1">
+              <div className="mb-2">
                 <img
                   src={Logo}
                   alt="SlimVita"
@@ -150,7 +150,7 @@ function App() {
               </p>
 
               <div className="bg-green-50 p-8 rounded-2xl shadow-md max-w-2xl mx-auto text-left">
-                <h3 className="text-2xl font-semibold text-green-800 mb-4">
+                <h3 className="text-2xl font-semibold text-green-800 mb-8">
                   Les bénéfices au quotidien :
                 </h3>
                 <ul className="space-y-3 text-gray-700">
@@ -163,8 +163,8 @@ function App() {
             </div>
           </section>
 
-          <section className="bg-[rgb(240,253,244)] py-6">
-            <div className="container mx-auto px-4 text-center">
+          <section className="bg-[rgb(240,253,244)] mt-12 py-6">
+            <div className="container mt-5 mx-auto px-4 text-center">
               <h2 className="text-xl leading-tight md:text-3xl font-extrabold text-gray-900">
                 Choisissez votre forfait SlimVita avec notre remise spéciale à
                 durée limitée !
