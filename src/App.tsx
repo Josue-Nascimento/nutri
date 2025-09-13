@@ -15,14 +15,11 @@ import {
   Award,
 } from "lucide-react";
 
-import selo2 from "./assets/Selos.png";
 import Guarantee from "./Guarantee";
 import Footer from "./Footer";
-import Famous from "./Famous";
-import Testimonies from "./Testimonies";
-import BeforeAfter from "./BeforeAfter";
 import Ingredients from "./Ingredients";
 import Popup from "./Popup";
+import Logo from "./assets/Design sem nome.png";
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
 
@@ -107,25 +104,6 @@ function App() {
       </div>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Video Section */}
-
-          <div className="aspect-video rounded-xl overflow-hidden mb-4">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=example&controls=1&modestbranding=1&rel=0"
-              title="Nutrivex - Video Presentazione"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="rounded-xl"
-            ></iframe>
-          </div>
-          <img src={selo2} />
-        </div>
-      </div>
 
       {/* Content Lock Overlay */}
       {!isUnlocked && (
@@ -147,50 +125,74 @@ function App() {
 
       {/* Unlocked Content */}
 
-      
       {isUnlocked && (
         <>
-        <section className="bg-[rgb(240,253,244)] py-6">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl leading-tight md:text-3xl font-extrabold text-gray-900">
-            Choisissez votre forfait SlimVita avec notre remise spéciale à durée
-            limitée !
-          </h2>
+          <section>
+            <div className="container mx-auto px-4 text-center">
+              <div className="mb-1">
+                <img
+                  src={Logo}
+                  alt="SlimVita"
+                  className="mx-auto w-64 md:w-80"
+                  style={{ background: "transparent" }}
+                />
+              </div>
 
-          <p className="mt-3 text-base md:text-lg font-semibold text-gray-800 flex justify-center items-center gap-2">
-            <span
-              className={`text-lg md:text-xl inline-block transition-transform duration-700 ${
-                flipped ? "rotate-180" : "rotate-0"
-              }`}
-            >
-              ⏳
-            </span>
-            Flacons SlimVita restantes:{" "}
-            <span
-              className={`font-extrabold text-green-700 transition-transform duration-500 ${
-                animate ? "scale-125 text-red-600" : ""
-              }`}
-            >
-              {flacons}
-            </span>
-          </p>
-        </div>
-      </section>
+              <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-6">
+                Maigrissez avec santé, légèreté et confiance
+              </h2>
+
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-10">
+                SlimVita est le complément naturel qui accélère votre
+                métabolisme, contrôle l’appétit et vous aide à obtenir le corps
+                dont vous avez toujours rêvé sans régimes restrictifs ni efforts
+                excessifs.
+              </p>
+
+              <div className="bg-green-50 p-8 rounded-2xl shadow-md max-w-2xl mx-auto text-left">
+                <h3 className="text-2xl font-semibold text-green-800 mb-4">
+                  Les bénéfices au quotidien :
+                </h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li>🔹 Brûle les graisses naturellement</li>
+                  <li>🔹 Réduit la faim et les compulsions</li>
+                  <li>🔹 Plus d’énergie et de vitalité</li>
+                  <li>🔹 Formule 100% naturelle et sûre</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-[rgb(240,253,244)] py-6">
+            <div className="container mx-auto px-4 text-center">
+              <h2 className="text-xl leading-tight md:text-3xl font-extrabold text-gray-900">
+                Choisissez votre forfait SlimVita avec notre remise spéciale à
+                durée limitée !
+              </h2>
+
+              <p className="mt-3 text-base md:text-lg font-semibold text-gray-800 flex justify-center items-center gap-2">
+                <span
+                  className={`text-lg md:text-xl inline-block transition-transform duration-700 ${
+                    flipped ? "rotate-180" : "rotate-0"
+                  }`}
+                >
+                  ⏳
+                </span>
+                Flacons SlimVita restantes:{" "}
+                <span
+                  className={`font-extrabold text-green-700 transition-transform duration-500 ${
+                    animate ? "scale-125 text-red-600" : ""
+                  }`}
+                >
+                  {flacons}
+                </span>
+              </p>
+            </div>
+          </section>
           <section className="bg-white py-12 px-4 md:px-8">
             <Freight />
             <Product />
             {/* Título */}
-            <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-800 mb-6">
-              Voyez ce que{" "}
-              <span className="text-green-700">
-                plus de 1500 femmes françaises
-              </span>
-              , qui ont déjà transformé leur vie, disent sur{" "}
-              <span className="text-green-700">SlimVita</span> :
-            </h2>
-
-            <Testimonies />
-            <BeforeAfter />
           </section>
 
           <Ingredients />
@@ -199,7 +201,7 @@ function App() {
             <Freight />
             <Product />
             <Guarantee flacons={flacons} setFlacons={setFlacons} />
-            <Famous />
+
             <Freight />
           </section>
           <Product />

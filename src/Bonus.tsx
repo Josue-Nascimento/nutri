@@ -104,29 +104,16 @@ export default function Bonus() {
           {/* Valor total */}
           <div className="mt-6 text-center">
             <div className="max-w-4xl mx-auto mt-6">
-              <div className="bg-gradient-to-r from-black via-green-500 to-black rounded-xl px-6 py-2 md:py-4 shadow-md text-center">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-  VALEUR TOTALE DES BONUS:{" "}
-  <span className="line-through decoration-red-500">+500 €</span>
-</h3>
+              
 
-                <p className="text-sm md:text-base text-white ">
-                  TU VAS RECEVOIR TOUT ÇA ICI, PROFILE : IL RESTE PEU DE{" "}
-                  <span className="font-bold text-base md:text-lg no-underline">
-                    FLACONS EN STOCK.
-                  </span>
-                </p>
+              
 
-                <img className="w-[600px] mx-auto " src={combos} />
-                
-                <h3 className="text-xl md:text-2xl font-bold text-white mt-5  ">
-                     Choisis ton kit avec le bouton ci-dessous 
-                </h3>
+
               </div>
             </div>
           </div>
         </div>
-      </div>
+      
     </>
   );
 }
