@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/secondary(/.*)?", "destination": "/secondary/index.html" }
+  ]
+}
