@@ -1,92 +1,64 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
 import Product from "./product";
 import Freight from "./Freight";
 import Faq from "./Faq";
 import Bonus from "./Bonus";
-import {
-  CheckCircle,
-  Star,
-  Shield,
-  Gift,
-  Leaf,
-  Heart,
-  Zap,
-  Clock,
-  Award,
-} from "lucide-react";
-
 import Guarantee from "./Guarantee";
 import Footer from "./Footer";
 import Ingredients from "./Ingredients";
 import Popup from "./Popup";
-import Logo from "./assets/Design sem nome.png";
-function App() {
-  const [isUnlocked, setIsUnlocked] = useState(false);
 
+import { Clock } from "lucide-react";
+import Logo from "./assets/Design sem nome.png";
+
+// ===== Esta é a página principal (rota "/") =====
+function MainPage() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const [videoTime, setVideoTime] = useState(0);
   const [flacons, setFlacons] = useState(48);
   const [animate, setAnimate] = useState(false);
-  const [flipped, setFlipped] = useState(false); // controla posição da ampulheta
-  // Configuração: tempo em segundos para desbloquear (5 minutos = 300 segundos)
-  const UNLOCK_TIME = 10; // Reduzido para 10 segundos para demonstração - altere para 300 para 5 minutos
+  const [flipped, setFlipped] = useState(false);
+
+  // tempo p/ desbloquear (mude para 300 em produção)
+  const UNLOCK_TIME = 10;
+
   useEffect(() => {
-    // Simular progresso do vídeo
     const videoTimer = setInterval(() => {
       setVideoTime((prev) => {
         const newTime = prev + 1;
-        if (newTime >= UNLOCK_TIME && !isUnlocked) {
-          setIsUnlocked(true);
-        }
+        if (newTime >= UNLOCK_TIME && !isUnlocked) setIsUnlocked(true);
         return newTime;
       });
     }, 1000);
-
     return () => clearInterval(videoTimer);
   }, [isUnlocked]);
 
-  //TEMPO DO ESTOQUE
+  // estoque decrescendo
   useEffect(() => {
     if (flacons > 0) {
       const interval = setInterval(() => {
-        setFlacons((prev) => {
-          if (prev > 0) {
-            return prev - 1;
-          } else {
-            clearInterval(interval);
-            return 0;
-          }
-        });
-      }, 10000); // diminui a cada 10 segundos
-
+        setFlacons((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 10000);
       return () => clearInterval(interval);
     }
   }, []);
 
-  // Animação sempre que o número muda
+  // animação quando o número muda
   useEffect(() => {
     if (flacons > 0) {
       setAnimate(true);
-      setFlipped((prev) => !prev); // alterna a posição da ampulheta
-
-      const timer = setTimeout(() => setAnimate(false), 800); // tempo da animação
+      setFlipped((prev) => !prev);
+      const timer = setTimeout(() => setAnimate(false), 800);
       return () => clearTimeout(timer);
     }
   }, [flacons]);
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const scrollToOffers = () => {
-    document.getElementById("offers")?.scrollIntoView({ behavior: "smooth" });
-  };
   const today = new Date();
-  const day = String(today.getDate()).padStart(2, "0"); // garante 2 dígitos
-  const month = String(today.getMonth() + 1).padStart(2, "0"); // meses começam em 0
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0");
   const year = today.getFullYear();
-
   const formattedDate = `${day}/${month}/${year}`;
 
   return (
@@ -97,16 +69,13 @@ function App() {
           <Clock className="w-5 h-5" />
           <span>
             ATTENTION ! Cette présentation sera disponible seulement jusqu’au:{" "}
-            {""}
             {formattedDate}
           </span>
         </div>
       </div>
 
-      {/* Hero Section */}
-
-      {/* Content Lock Overlay */}
-      {!isUnlocked && (
+      {/* Overlay de bloqueio */}
+     
         <div
           className="fixed inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center z-30"
           style={{ top: "100vh", minHeight: "200vh" }}
@@ -121,11 +90,10 @@ function App() {
             </p>
           </div>
         </div>
-      )}
+  
 
-      {/* Unlocked Content */}
-
-      {isUnlocked && (
+      {/* Conteúdo liberado */}
+  
         <>
           <section>
             <div className="container mx-auto px-4 text-center">
@@ -189,30 +157,44 @@ function App() {
               </p>
             </div>
           </section>
+
           <section className="bg-white py-12 px-4 md:px-8">
             <Freight />
             <Product />
-            {/* Título */}
           </section>
 
           <Ingredients />
           <Bonus />
+
           <section className="bg-white py-12 px-4 md:px-8">
             <Freight />
             <Product />
             <Guarantee flacons={flacons} setFlacons={setFlacons} />
-
             <Freight />
           </section>
+
           <Product />
           <Faq />
           <Footer />
         </>
-      )}
+   
 
-      {/* Popup Modal */}
+      {/* Popup global (se quiser só na home, mova para dentro de isUnlocked) */}
       <Popup />
     </div>
   );
 }
-export default App;
+
+// ===== Shell com rotas =====
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        
+        <Route path="/secondary" element={<MainPage />} />
+        {/* (Opcional) 404: redireciona tudo para "/" */}
+        {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+      </Routes>
+    </Router>
+  );
+}
