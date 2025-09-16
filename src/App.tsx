@@ -168,8 +168,6 @@ function App() {
         <Faq />
         <Footer />
       </>
-
-      <Popup />
     </div>
   );
 }
